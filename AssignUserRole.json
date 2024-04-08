@@ -1,0 +1,10 @@
+{
+  "staff": {
+  "User": "Albert Kwan",
+  "Role": "Network Engineer",
+  "OU": "IT_Dept",
+  "EndDate": "15/02/2024",
+  "EffectiveDate": "Monday",
+  "Remove": false
+  }
+}
