@@ -9,7 +9,7 @@ $jsonfile = "AssignUserRole.json"
 $weekday = @("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")   
 
 #get ou path
-$User_Structure = Get-ADOrganizationalUnit -Filter * -Properties Name, CanonicalName, DistinguishedName -SearchBase 'OU=MPSC Users,DC=mpsc,DC=nsw,DC=gov,DC=au' |  Where-Object {$_.Name -ne 'MPSC Users' } | select Name, CanonicalName, DistinguishedName
+$User_Structure = Get-ADOrganizationalUnit -Filter * -Properties Name, CanonicalName, DistinguishedName -SearchBase 'OU=Users,DC=<your domain>,DC=com,DC=au' |  Where-Object {$_.Name -ne 'Users' } | select Name, CanonicalName, DistinguishedName
 
 $PathObj = @()
 
@@ -18,7 +18,7 @@ $User_Structure| ForEach-Object {
     $Object = New-Object PSObject
     $Object | add-member Noteproperty Name $_.Name
 
-    $Path = $_.CanonicalName -replace 'mpsc.nsw.gov.au/MPSC Users/', ''
+    $Path = $_.CanonicalName -replace '<your domain>/Users/', ''
     $Object | add-member Noteproperty Path $Path
 
     $Object | add-member Noteproperty DistinguishedName $_.DistinguishedName
@@ -30,7 +30,7 @@ $User_Structure| ForEach-Object {
 #$PathObj | Sort-Object Path | Export-Csv "$dir\path.csv" -NoTypeInformation 
 
 #get ad user
-$User = Get-ADUser -Filter {(Enabled -eq "True")} -properties  DisplayName, sAMAccountName, Enabled  -SearchBase 'OU=MPSC Users,DC=mpsc,DC=nsw,DC=gov,DC=au' | Select DisplayName, sAMAccountName, Enabled
+$User = Get-ADUser -Filter {(Enabled -eq "True")} -properties  DisplayName, sAMAccountName, Enabled  -SearchBase 'OU=Users,DC=<your domain>,DC=com,DC=au' | Select DisplayName, sAMAccountName, Enabled
 
 $UserObj = @()
 
@@ -50,7 +50,7 @@ $User| ForEach-Object {
 #$UserObj | Sort-Object DisplayName | Export-Csv "$dir\user.csv" -NoTypeInformation 
 
 #get security group
-$Grps = Get-ADGroup -Filter{GroupCategory -eq "security"} -properties Name, DistinguishedName  -SearchBase 'OU=Roles,OU=MPSC Groups,DC=mpsc,DC=nsw,DC=gov,DC=au' | select Name, DistinguishedName
+$Grps = Get-ADGroup -Filter{GroupCategory -eq "security"} -properties Name, DistinguishedName  -SearchBase 'OU=Users,DC=<your domain>,DC=com,DC=au' | select Name, DistinguishedName
 
 $GrpObj = @()
 
