@@ -15,7 +15,7 @@
 <p>By accessing or using this project, you agree to abide by the terms of this license. If you do not agree with these terms, you are not permitted to access or use the materials within this project.</p>
 <hr>
 <p>This project undertakes PowerShell script with GUI interface, the machine need to have Active Directory Module and connected to a Active Directory environment.</p>
-<hr>
+<h2 id="section"><img src="https://github.com/albert-projects/powershell-assign-user-role/blob/master/screenshot.png" alt="Screenshot"></h2>
 <p>powershell-assign-user-role<br>
 Albert Kwan</p>
 
